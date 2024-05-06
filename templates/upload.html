@@ -1,37 +1,28 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styling.css') }}">
-	<title>home page</title>
+	<title>Trang chủ</title>
 </head>
+
 <body>
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
-		<a class='navbar-brand' href="/">TSR</a>
-
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="collapse navbar-collapse" id="collapsibleNavbar">
-			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link" href="/">HOME</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/about">ABOUT</a>
-				</li>
-			</ul>
-		</div>
+		<img style="height: 35px; width: 35px; margin-right: 10px; border-radius: 50%;"
+			src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpT1JcQaAiEinEnObhdsuGqXGeykvIujY12Axaz0EXuhlHcUXvDu9i5TeWR4kbASfBT_Y&usqp=CAU"
+			alt="">
+		<a class='navbar-brand' href="/">Khai phá dữ liệu ĐPT</a>
 	</nav>
 
 	<div class='bg-image'></div>
-	<div class='bg-text'>	
-		<header align='center'>TRAFFIC SIGN RECOGNITION</header>
+	<div class='bg-text'>
+		<header align='center' style="font-size: 25px;">Nhận diện biển báo - Nhóm 9</header>
 		<br>
 		<br>
 		<div class="container">
@@ -39,33 +30,61 @@
 				<div class="col">
 					<h4>Upload an image</h4>
 					<br>
-					<form id = 'upload-form'action = "{{ url_for('upload')}}" method='POST' enctype='multipart/form-data'>
+					<form id='upload-form' action="{{ url_for('upload')}}" method='POST' enctype='multipart/form-data'>
 						<div class="form-group">
-							<label>Select Image</label>
+							<label>Chọn hình ảnh</label>
 							<div class='custom-file'>
-								<input type="file" name="file" class='custom-file-input'
-								id="file">
-								<label class="custom-file-label" for="file" align="left">Select Image...</label>	
+								<input type="file" name="file" class='custom-file-input' id="file"
+									onchange="previewImage()">
+								<label class="custom-file-label" for="file" align="left">Chọn hình ảnh...</label>
 							</div>
 						</div>
-						<div class="formats">
+						<!-- <div class="formats">
 							<small class="text-muted">
-								<strong style="color: DodgerBlue;">* allowed image formats png, jpg, gif, svg, bmp</strong>
+								<strong style="color: DodgerBlue;">* allowed image formats png, jpg, gif, svg,
+									bmp</strong>
 							</small>
-						</div>
+						</div> -->
 						<br>
-						<button type="submit" class='btn btn-danger btn-lg'>Upload And Predict</button>
+						<div id="image-preview"></div>
+						<button type="submit" class='btn btn-danger btn-lg'
+							style="margin-top: 20px; background-color: rgb(4, 0, 255) !important; color: rgb(235, 243, 244);">Upload
+							And Predict</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class='bg-text1'>
-		<FOOTER align ='center'>CREATOR : ARYAN SHARMA</FOOTER>
-	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+	<script>
+		function previewImage() {
+			var preview = document.querySelector('#image-preview');
+			var file = document.querySelector('input[type=file]').files[0];
+			var reader = new FileReader();
 
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+			reader.onloadend = function () {
+				var img = document.createElement('img');
+				img.src = reader.result;
+				img.style.maxWidth = '100%';
+				preview.innerHTML = '';
+				preview.appendChild(img);
+			}
+
+			if (file) {
+				reader.readAsDataURL(file);
+			} else {
+				preview.innerHTML = '';
+			}
+		}
+	</script>
 </body>
+
 </html>
